@@ -144,7 +144,7 @@ def setup_page():
 
 def render_header():
     st.title("Diabetes Prediction System")
-    st.markdown("#### AI-Powered Risk Assessment Tool")
+    # st.markdown("#### AI-Powered Risk Assessment Tool")
     st.markdown("---")
 
 
@@ -152,18 +152,25 @@ def render_sidebar_inputs() -> PatientData:
     st.sidebar.title("Patient Information")
     
     st.sidebar.subheader("Demographics")
+    gender = st.sidebar.selectbox(
+        'Gender',
+        options=['Female', 'Male']
+    )
     age = st.sidebar.slider(
         'Age (years)', 
         min_value=config.FEATURE_RANGES['age']['min'],
         max_value=config.FEATURE_RANGES['age']['max'],
         value=config.FEATURE_RANGES['age']['default']
     )
-    pregnancies = st.sidebar.number_input(
-        'Number of Pregnancies', 
-        min_value=config.FEATURE_RANGES['pregnancies']['min'],
-        max_value=config.FEATURE_RANGES['pregnancies']['max'],
-        value=config.FEATURE_RANGES['pregnancies']['default']
-    )
+    if gender == 'Female':
+        pregnancies = st.sidebar.number_input(
+            'Number of Pregnancies', 
+            min_value=config.FEATURE_RANGES['pregnancies']['min'],
+            max_value=config.FEATURE_RANGES['pregnancies']['max'],
+            value=config.FEATURE_RANGES['pregnancies']['default']
+        )
+    else:
+        pregnancies = 0
     
     st.sidebar.subheader("Medical Measurements")
     glucose = st.sidebar.slider(
@@ -311,7 +318,6 @@ def render_prediction_results(result: PredictionResult, patient_data: PatientDat
     
     render_risk_analysis(patient_data)
     render_recommendations(result)
-    render_disclaimer()
 
 
 def render_risk_analysis(patient_data: PatientData):
@@ -359,20 +365,6 @@ def render_recommendations(result: PredictionResult):
         4. **Healthy weight** - Monitor and maintain optimal BMI
         5. **Quality sleep** - Aim for 7-9 hours of sleep per night
         """)
-
-
-def render_disclaimer():
-    st.markdown("---")
-    st.warning("""
-    **IMPORTANT MEDICAL DISCLAIMER**
-    
-    This diabetes prediction tool is designed for educational and informational purposes only. 
-    It should NOT be used as a substitute for professional medical advice, diagnosis, or treatment.
-    
-    - Results are based on statistical models and may not reflect individual health conditions
-    - Always consult qualified healthcare professionals for medical concerns
-    - Do not make health decisions solely based on this tool's predictions
-    """, icon=":material/info:")
 
 
 def render_landing_page():
