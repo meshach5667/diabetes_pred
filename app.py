@@ -144,7 +144,7 @@ def setup_page():
 
 def render_header():
     st.title("Diabetes Prediction System")
-    # st.markdown("#### AI-Powered Risk Assessment Tool")
+
     st.markdown("---")
 
 
@@ -370,51 +370,6 @@ def render_recommendations(result: PredictionResult):
 def render_landing_page():
     st.info("Enter patient information in the sidebar and click 'Predict' to get started", icon=":material/arrow_back:")
     
-    st.markdown("---")
-    st.subheader("About This Tool")
-    
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.markdown("**:material/smart_toy: Model**")
-        st.markdown("""
-        - Algorithm: Support Vector Machine (SVM)
-        - Kernel: RBF (Radial Basis Function)
-        - Optimized: Grid Search CV
-        """)
-    
-    with col2:
-        st.markdown("**:material/database: Dataset**")
-        st.markdown("""
-        - Source: Pima Indians Diabetes Database
-        - Samples: 768 patients
-        - Features: 8 health metrics
-        """)
-    
-    with col3:
-        st.markdown("**:material/target: Performance**")
-        st.markdown("""
-        - Accuracy: ~78%
-        - Validation: 5-Fold Cross-Validation
-        - Metric: ROC-AUC optimized
-        """)
-
-
-def render_model_error():
-    st.error("Model files not found!", icon=":material/error:")
-    st.markdown("""
-    ### How to Fix
-    
-    The prediction model has not been trained yet. Please follow these steps:
-    
-    1. Open the Jupyter notebook: `diabetes-prediction.ipynb`
-    2. Run all cells to train the model
-    3. Verify that these files are created:
-       - `diabetes_model.pkl`
-       - `scaler_svm.pkl`
-    4. Refresh this page
-    """)
-
 
 def main():
     setup_page()
@@ -423,7 +378,7 @@ def main():
     model_manager = get_model_manager()
     
     if model_manager.model is None or model_manager.scaler is None:
-        render_model_error()
+
         return
     
     patient_data = render_sidebar_inputs()
@@ -446,8 +401,8 @@ def main():
     else:
         render_landing_page()
     
-    st.sidebar.markdown("---")
-    st.sidebar.caption("Built with Streamlit & Scikit-learn")
+
+    
 
 
 if __name__ == "__main__":
