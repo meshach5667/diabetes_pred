@@ -23,7 +23,7 @@ class AppConfig:
             'insulin': {'min': 0, 'max': 900, 'default': 80, 'step': 1},
             'bmi': {'min': 10.0, 'max': 70.0, 'default': 25.0, 'step': 0.1},
             'dpf': {'min': 0.0, 'max': 2.5, 'default': 0.5, 'step': 0.01},
-            'age': {'min': 21, 'max': 100, 'default': 30, 'step': 1},
+            'age': {'min': 1, 'max': 100, 'default': 30, 'step': 1},
         }
 
     LOW_RISK_THRESHOLD: float = 30.0
@@ -50,8 +50,6 @@ class PatientData:
             self.skin_thickness, self.insulin, self.bmi,
             self.diabetes_pedigree_function, self.age
         ]])
-
-
 @dataclass
 class PredictionResult:
     prediction: int
