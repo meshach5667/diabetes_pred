@@ -10,8 +10,8 @@ from pathlib import Path
 class AppConfig:
     PAGE_TITLE: str = "Diabetes Prediction"
     PAGE_ICON: str = ":material/cardiology:"
-    MODEL_PATH: str = "diabetes_model.pkl"
-    SCALER_PATH: str = "scaler_svm.pkl"
+    MODEL_PATH: str = "diabetes_model_v2.pkl"
+    SCALER_PATH: str = "scaler_rf_v2.pkl"
     FEATURE_RANGES: dict = None
     
     def __post_init__(self):
